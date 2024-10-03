@@ -1,6 +1,6 @@
 import streamlit as st
 
-# Background image styling (optional)
+# Background image styling
 page_bg_img = '''
 <style>
 body {
@@ -12,45 +12,27 @@ background-attachment: fixed;
 }
 </style>
 '''
-
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Page Title and Subtitle
 st.title("About Us")
-st.subheader("Empowering Healthy Eating with Personalized Diet Recommendations")
+st.subheader("Diet Recommendations for Healthier Living")
 
 # Introduction
 st.write("""
-Welcome to our Diet Recommendation System! Our mission is to make healthy eating simple, personalized, 
-and accessible. We understand that every individual is unique, and so are their dietary needs. Whether you're managing 
-a health condition like diabetes or simply striving for better nutrition, our platform is here to guide you with tailored meal suggestions.
-""")
-
-# About the Project
-st.subheader("What We Do")
-st.write("""
-We use advanced algorithms to analyze user inputs, including dietary preferences and health conditions, to provide customized meal recommendations. 
-  
-By offering meals that fit your health needs, we aim to help you achieve your wellness goals efficiently.
+In today's fast-paced world, people are increasingly focused on improving their health and lifestyle. However, simply avoiding junk food and exercising is not enough; a balanced diet is crucial for overall well-being. A diet tailored to one's height, weight, and age can help maintain a healthy weight, reduce the risk of chronic diseases like heart disease and cancer, and enhance overall health.
 """)
 
 # How It Works
 st.subheader("How It Works")
 st.write("""
-Our recommendation system processes the following:
-- **Diet Preferences:** Vegetarian, Non-Vegetarian, Vegan
-- **Health Conditions:** Suggests meals optimized for managing specific conditions
-- **Nutritional Balance:** Ensures your meals are balanced with the right nutrients
+We personalize meals by considering your:
+- Diet Preferences (Vegetarian, Non-Vegetarian)
+- Activity Level
+- Nutritional Needs
 
-With this information, we generate meal plans that are not only nutritious but also delicious, making it easier to stick to a healthy eating routine.
+Get meal plans that are nutritious, balanced, and delicious.
 """)
 
-# Call to Action
-st.markdown("""
-**Ready to Start Your Journey to Healthier Eating?**  
-[Sign Up Now](#) to get personalized meal recommendations today!
-""")
 
-# Footer
-st.write("---")
-st.write("**© 2024 Diet Recommendation System**")
+

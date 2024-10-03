@@ -260,9 +260,9 @@ title="<h1 style='text-align: center;'>Meal Recommendation</h1>"
 st.markdown(title, unsafe_allow_html=True)
 with st.form("recommendation_form"):
     st.write("Modify the values and click the Generate button to use")
-    age = st.number_input('Age',min_value=2, max_value=120, step=1)
-    height = st.number_input('Height(cm)',min_value=50, max_value=300, step=1)
-    weight = st.number_input('Weight(kg)',min_value=10, max_value=300, step=1)
+    age = st.number_input('Age',min_value=18, max_value=100, step=1)
+    height = st.number_input('Height(cm)',min_value=100, max_value=300, step=1)
+    weight = st.number_input('Weight(kg)',min_value=20, max_value=300, step=1)
     gender = st.radio('Gender',('Male','Female'))
     activity = st.select_slider('Activity',options=['Sedentary', 'Light Exercise', 'Moderate Exercise', 'very active','extreme'])
     option = st.selectbox('Choose your weight loss plan:',display.plans)
