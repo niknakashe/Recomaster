@@ -15,7 +15,8 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI()
 
 # Load dataset
-dataset = pd.read_csv('C:/RecoMaster/Data/food1.csv')
+# dataset = pd.read_csv('C:/RecoMaster/Data/food1.csv')
+dataset = pd.read_csv('../Data/food1.csv')
 dataset.info()
 
 app.add_middleware(

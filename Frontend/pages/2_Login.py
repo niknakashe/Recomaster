@@ -3,14 +3,26 @@ import pyodbc
 import hashlib
 
 # Function to connect to the SQL Server
+# def init_db_connection():
+#     connection = pyodbc.connect(
+#         'DRIVER={ODBC Driver 17 for SQL Server};'
+#         'SERVER=DESKTOP-OJD0AB2\SQLEXPRESS;'  
+#         'DATABASE=RecoMaster;'
+#         'Trusted_Connection=yes;'
+#     )
+#     return connection
+
+# Function to connect to the SQL Server
 def init_db_connection():
     connection = pyodbc.connect(
         'DRIVER={ODBC Driver 17 for SQL Server};'
-        'SERVER=DESKTOP-OJD0AB2\SQLEXPRESS;'  
+        'SERVER=sqlserver;'  # Use the service name from docker-compose.yml
         'DATABASE=RecoMaster;'
-        'Trusted_Connection=yes;'
+        'UID=sa;'  # SQL Server admin user
+        'PWD=admin@1234;'  # Password you defined for the SA user
     )
     return connection
+
 
 # Function to hash passwords
 def hash_password(password):
