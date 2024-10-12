@@ -152,9 +152,9 @@ class Display:
                             """) 
                         expander.markdown(f'<h5 style="text-align: center;font-family:sans-serif;">Cooking and Preparation Time:</h5>', unsafe_allow_html=True)   
                         expander.markdown(f"""
-                                - Cook Time       : {recipe['CookTime']}min
-                                - Preparation Time: {recipe['PrepTime']}min
-                                - Total Time      : {recipe['TotalTime']}min
+                                - Cook Time       : {recipe['CookTime']}
+                                - Preparation Time: {recipe['PrepTime']}
+                                - Total Time      : {recipe['TotalTime']}
                             """)              
 
                         youtube_url = f"https://www.youtube.com/results?search_query={recipe_name.lower().replace(' ','+')}"

@@ -15,7 +15,7 @@ class Generator:
         self.params = params
 
     def filter_recipes_by_diet(self, recipes):
-        non_veg_keywords = ['meat', 'fish', 'egg', 'beef', 'chicken', 'pork', 'cod']
+        non_veg_keywords = ['meat','beef','chicken','lamb','pork','turkey','goat','duck','veal','bacon','sausages','fish','shellfish','clams','oysters','mussels','squid','calamari','octopus','scallops','egg','rabbit','venison','quail','cod','salmon fillets']
         filtered_recipes = []
         
         for recipe in recipes:
