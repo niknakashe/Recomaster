@@ -9,7 +9,7 @@ port = os.getenv("DB_PORT")
 user = os.getenv("DB_USER")
 password = os.getenv("DB_PASSWORD")
 database = os.getenv("DB_NAME")
-ssl_ca = './Frontend/ca_certificate.pem'
+ssl_ca = 'https://media.greatmanagerinstitute.com/assets/scripts/ca_certificate.pem'
 print(ssl_ca)
 
 print(host, port, user, password, database)
