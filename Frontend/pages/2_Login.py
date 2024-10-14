@@ -1,31 +1,30 @@
 import streamlit as st
-import pymysql
+import mysql.connector
 import hashlib
 import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 # Load environment variables
 host = os.getenv("DB_HOST")
-port = int(os.getenv("DB_PORT"))  # Convert port to integer
+port = os.getenv("DB_PORT")
 user = os.getenv("DB_USER")
 password = os.getenv("DB_PASSWORD")
 database = os.getenv("DB_NAME")
+ssl_ca = './Frontend/ca_certificate.pem'
+
+print(host, port, user, password, database)
 
 # Function to connect to the MySQL database
 def init_db_connection():
-    connection = pymysql.connect(
+    connection = mysql.connector.connect(
         host=host,
         port=port,
         user=user,
         password=password,
-        db=database,
-        charset="utf8mb4",
-        cursorclass=pymysql.cursors.DictCursor
+        database=database,
+        ssl_ca=ssl_ca           
     )
     return connection
+
 
 # Function to hash passwords
 def hash_password(password):
@@ -59,7 +58,7 @@ if not st.session_state.logged_in:
             user_data = login_user(username, password)
             if user_data:
                 st.session_state.logged_in = True
-                st.session_state['id'] = user_data['id']  # Store user ID in session state
+                st.session_state['id'] = user_data[0]  # Store user ID in session state
                 st.success(f"Welcome, {username}!")
                 # Optionally redirect or reload the page
                 # st.experimental_rerun() 
