@@ -31,6 +31,7 @@ def hash_password(password):
 # Function to validate user login and get user data
 def login_user(username, password):
     conn = init_db_connection()
+    print(conn)
     cursor = conn.cursor()
     hashed_password = hash_password(password)
     cursor.execute('''
