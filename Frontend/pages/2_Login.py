@@ -1,5 +1,4 @@
 import streamlit as st
-import mysql.connector
 import hashlib
 import os
 
@@ -10,37 +9,9 @@ user = os.getenv("DB_USER")
 password = os.getenv("DB_PASSWORD")
 database = os.getenv("DB_NAME")
 
-print(host, port, user, password, database)
-
-# Function to connect to the MySQL database
-def init_db_connection():
-    connection = mysql.connector.connect(
-        host=host,
-        port=port,
-        user=user,
-        password=password,
-        database=database              
-    )
-    return connection
-
-
 # Function to hash passwords
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
-
-# Function to validate user login and get user data
-def login_user(username, password):
-    conn = init_db_connection()
-    print(conn)
-    cursor = conn.cursor()
-    hashed_password = hash_password(password)
-    cursor.execute('''
-        SELECT id FROM users WHERE username = %s AND password = %s
-    ''', (username, hashed_password))
-    data = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    return data  # Return the fetched data (None if not found)
 
 # Streamlit UI for Log In
 if 'logged_in' not in st.session_state:
@@ -54,10 +25,19 @@ if not st.session_state.logged_in:
 
     if st.button("Log In"):
         if username and password:
-            user_data = login_user(username, password)
+            # Initialize connection to the MySQL database
+            conn = st.connection('mysql', type='sql')
+
+            hashed_password = hash_password(password)
+            # Validate user login
+            user_query = f'''
+                SELECT id FROM users WHERE username = %s AND password = %s
+            '''
+            user_data = conn.query(user_query, (username, hashed_password))  # Use the connection to query the database
+
             if user_data:
                 st.session_state.logged_in = True
-                st.session_state['id'] = user_data[0]  # Store user ID in session state
+                st.session_state['id'] = user_data.iloc[0]['id']  # Assuming id is in the first column
                 st.success(f"Welcome, {username}!")
                 # Optionally redirect or reload the page
                 # st.experimental_rerun() 
