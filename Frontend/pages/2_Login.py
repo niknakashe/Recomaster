@@ -2,18 +2,22 @@ import streamlit as st
 import mysql.connector
 import hashlib
 import os
-from dotenv import load_dotenv
 
-load_dotenv()
+# Load environment variables
+host = os.getenv("DB_HOST")
+port = int(os.getenv("DB_PORT"))
+user = os.getenv("DB_USER")
+password = os.getenv("DB_PASSWORD")
+database = os.getenv("DB_NAME")
 
 # Function to connect to the MySQL database
 def init_db_connection():
     connection = mysql.connector.connect(
-        host=os.getenv("DB_HOST"),  # Load host from .env
-        port=int(os.getenv("DB_PORT")),  # Load port from .env
-        user=os.getenv("DB_USER"),  # Load user from .env
-        password=os.getenv("DB_PASSWORD"),  # Load password from .env
-        database=os.getenv("DB_NAME"),  # Load database name from .env             
+        host=host,
+        port=port,
+        user=user,
+        password=password,
+        database=database           
     )
     return connection
 
