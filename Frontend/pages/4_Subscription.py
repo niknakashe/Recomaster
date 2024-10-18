@@ -30,9 +30,15 @@ else:
     # Proceed with payment
     if st.button("Proceed to Payment"):
         if email and contact:
-            # Send the request to FastAPI to create a payment link
+            # Send the request to FastAPI to create a payment link, including the access token
+            headers = {
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {st.session_state["access_token"]}'  # Include the access token in headers
+            }
+
             response = requests.post("https://recommend-meal.osc-fr1.scalingo.io/create_payment_link/", 
-                                         json={"amount": selected_amount, "email": email, "contact": contact})
+                                         json={"amount": selected_amount, "email": email, "contact": contact},
+                                         headers=headers)  # Add headers to the request
 
             # Check if payment link creation is successful
             if response.status_code == 200:
