@@ -31,7 +31,7 @@ else:
     if st.button("Proceed to Payment"):
         if email and contact:
             # Send the request to FastAPI to create a payment link
-            response = requests.post("http://127.0.0.1:8502/create_payment_link/", 
+            response = requests.post("https://recommend-meal.osc-fr1.scalingo.io/create_payment_link/", 
                                          json={"amount": selected_amount, "email": email, "contact": contact})
 
             # Check if payment link creation is successful
