@@ -1,17 +1,8 @@
 import streamlit as st
-import hashlib
-import os
+import requests
 
-# Load environment variables
-host = os.getenv("DB_HOST")
-port = os.getenv("DB_PORT")
-user = os.getenv("DB_USER")
-password = os.getenv("DB_PASSWORD")
-database = os.getenv("DB_NAME")
-
-# Function to hash passwords
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+# URL of the FastAPI backend
+API_URL = "https://recommend-meal.osc-fr1.scalingo.io/login/"
 
 # Streamlit UI for Log In
 if 'logged_in' not in st.session_state:
@@ -25,22 +16,14 @@ if not st.session_state.logged_in:
 
     if st.button("Log In"):
         if username and password:
-            # Initialize connection to the MySQL database
-            conn = st.connection('mysql', type='sql')
+            # Send login request to FastAPI
+            response = requests.post(API_URL, data={'username': username, 'password': password})
 
-            hashed_password = hash_password(password)
-            # Validate user login
-            user_query = f'''
-                SELECT id FROM users WHERE username = %s AND password = %s
-            '''
-            user_data = conn.query(user_query, (username, hashed_password))  # Use the connection to query the database
-
-            if user_data:
+            if response.status_code == 200:
+                token_data = response.json()
                 st.session_state.logged_in = True
-                st.session_state['id'] = user_data.iloc[0]['id']  # Assuming id is in the first column
+                st.session_state['access_token'] = token_data['access_token']  # Store access token
                 st.success(f"Welcome, {username}!")
-                # Optionally redirect or reload the page
-                # st.experimental_rerun() 
             else:
                 st.error("Invalid username or password.")
         else:
@@ -53,3 +36,9 @@ if not st.session_state.logged_in:
 else:
     st.write("You are already logged in!")
     st.write("You can now access the Meal Recommendation page.")
+
+    # Optional: Add a logout button
+    if st.button("Log Out"):
+        st.session_state.logged_in = False
+        del st.session_state['access_token']  # Remove the token on logout
+        st.success("You have been logged out.")
