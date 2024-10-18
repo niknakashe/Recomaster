@@ -85,7 +85,7 @@ st.markdown(
 
 st.sidebar.success("Select a recommendation app.")
 
-url="http://localhost:8501/Signup"
+url="https://meal-recommendation.streamlit.app/Signup"
 
 # Signup button centered in the viewport
 st.markdown(
