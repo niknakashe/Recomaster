@@ -31,7 +31,7 @@ if not st.session_state.logged_in:
 
     # Link to the sign-up page
     st.write("Don't have an account? [Sign Up here](../Signup)")
-    st.write("[Forgot Password?](../ForgotPassword)")
+    # st.write("[Forgot Password?](../ForgotPassword)")
 
 else:
     st.write("You are already logged in!")
